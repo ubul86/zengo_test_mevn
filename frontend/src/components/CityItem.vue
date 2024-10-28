@@ -41,15 +41,15 @@ watch(() => props.city.name, (newName) => {
 });
 
 function startEdit() {
-  emit('editCity', props.city._id, editedName.value);
+  emit('editCity', props.city.id, editedName.value);
 }
 
 function onUpdate() {
-  emit('updateCity', props.city._id, editedName.value);
+  emit('updateCity', props.city.id, editedName.value);
 }
 
 function onDelete() {
-  emit('deleteCity', props.city._id);
+  emit('deleteCity', props.city.id);
 }
 
 function onCancel() {

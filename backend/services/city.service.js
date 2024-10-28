@@ -9,12 +9,17 @@ class CityService {
             filter.county = query.countyId;
         }
 
-        return await City.find(filter).populate('county', 'name');
+        const cities = await City.find(filter).populate('county', 'name');
+
+        return cities.map(city => city?.formatResponse());
 
     }
 
     async getCityById(id) {
-        return await City.findById(id).populate('county', 'name');
+
+        const city = await City.findById(id).populate('county', 'name');
+
+        return city.formatResponse();
     }
 
     async createCity(cityData) {

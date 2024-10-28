@@ -3,7 +3,7 @@
       v-model="selectedCounty"
       :items="counties"
       item-text="name"
-      item-value="_id"
+      item-value="id"
       label="Choose a County"
       return-object
   />
@@ -30,7 +30,7 @@ const counties = computed(() => countyStore.counties.map(county => ({
 watch(selectedCounty, (newValue) => {
   if (selectedCounty) {
     countyStore.selectCounty(selectedCounty.value);
-    cityStore.fetchCities(selectedCounty.value._id);
+    cityStore.fetchCities(selectedCounty.value.id);
   }
 });
 

@@ -24,7 +24,7 @@ export const useCityStore = defineStore('city', {
         async updateCity(id, name) {
             try {
                 await cityService.update(id, { name });
-                const city = this.cities.find(city => city._id === id);
+                const city = this.cities.find(city => city.id === id);
                 if (city) {
                     city.name = name;
                 }
@@ -35,7 +35,7 @@ export const useCityStore = defineStore('city', {
         async deleteCity(id) {
             try {
                 await cityService.delete(id);
-                this.cities = this.cities.filter(city => city._id !== id);
+                this.cities = this.cities.filter(city => city.id !== id);
             } catch (error) {
                 console.error('Error when delete a City:', error);
             }

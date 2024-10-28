@@ -11,9 +11,9 @@
     <v-list>
       <CityItem
           v-for="city in cities"
-          :key="city._id"
+          :key="city.id"
           :city="city"
-          :isEditing="editingCityId === city._id"
+          :isEditing="editingCityId === city.id"
           @editCity="editCity"
           @updateCity="updateCity"
           @deleteCity="deleteCity"

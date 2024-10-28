@@ -35,8 +35,8 @@ async function addCity() {
     console.error('A megye vagy a város neve nincs kiválasztva!');
     return;
   }
-console.log(selectedCounty)
-  await cityStore.addCity(newCityName.value, selectedCounty.value._id);
+
+  await cityStore.addCity(newCityName.value, selectedCounty.value.id);
   newCityName.value = '';
 }
 </script>
