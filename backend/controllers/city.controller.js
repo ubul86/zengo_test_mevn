@@ -23,7 +23,7 @@ const getCityById = async (req, res) => {
 const createCity = async (req, res) => {
     try {
         const city = await cityService.createCity(req.body);
-        res.status(201).json({ message: 'City created successfully', data: city });
+        res.status(201).json({ message: 'City created successfully', data: city.formatResponse() });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -35,7 +35,7 @@ const updateCity = async (req, res) => {
         if (!city) {
             return res.status(404).json({ message: 'City not found' });
         }
-        res.status(200).json({ message: 'City updated successfully', data: city });
+        res.status(200).json({ message: 'City updated successfully', data: city.formatResponse() });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
