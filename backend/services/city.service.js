@@ -11,7 +11,7 @@ class CityService {
 
         const cities = await City.find(filter).populate('county', 'name');
 
-        return cities.map(city => city?.formatResponse());
+        return cities;
 
     }
 
