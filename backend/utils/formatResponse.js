@@ -1,9 +1,9 @@
 const formatCityResponse = (city) => {
     return {
-        id: this._id,
-        name: this.name,
-        county_id: this.county ? this.county._id : null,
-        county_name: this.county ? this.county.name : null,
+        id: city._id,
+        name: city.name,
+        county_id: city.county ? city.county._id : null,
+        county_name: city.county ? city.county.name : null,
     };
 }
 
