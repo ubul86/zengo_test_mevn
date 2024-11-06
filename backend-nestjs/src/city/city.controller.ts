@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Put, Delete, Param, NotFoundException} from '@nestjs/common';
+import {Body, Controller, Get, Post, Put, Delete, Param, Query, NotFoundException} from '@nestjs/common';
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto} from "./dto/update-city.dto";
@@ -18,20 +18,9 @@ export class CityController {
         return city;
     }
 
-    @Get('by-county/:countyId')
-    async getCitiesByCounty(@Param('countyId') countyId: string) {
-        const cities = await this.cityService.findByCountyId(countyId);
-
-        if (!cities || cities.length === 0) {
-            throw new NotFoundException('Cities not found for the given county');
-        }
-
-        return cities;
-    }
-
     @Get()
-    async index() {
-        return this.cityService.findAllCities();
+    async index(@Query('countyId') countyId?: string) {
+        return this.cityService.findAllCities(countyId);
     }
 
     @Post()

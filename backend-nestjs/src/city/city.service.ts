@@ -16,15 +16,9 @@ export class CityService {
         return await this.cityModel.findById(id).populate('county').exec();
     }
 
-    async findAllCities(): Promise<City[]> {
-        return await this.cityModel.find().populate('county').exec();
-    }
-
-    async findByCountyId(countyId: string): Promise<City[]> {
-        return await this.cityModel
-            .find({ county: countyId })
-            .populate('county')
-            .exec();
+    async findAllCities(countyId?: string): Promise<City[]> {
+        const filter = countyId ? { county: countyId } : {};
+        return await this.cityModel.find(filter).populate('county').exec();
     }
 
     async createCity(createCityDto: CreateCityDto): Promise<City> {
