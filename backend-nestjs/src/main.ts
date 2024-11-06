@@ -10,6 +10,12 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ApiResponseInterceptor());
 
+  app.enableCors({
+    origin: process.env.cors_origin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   await app.listen(process.env.NODE_PORT_CONTAINER ?? 3000);
 }
 bootstrap();
