@@ -9,6 +9,7 @@ import {County, CountySchema} from "./county.schema";
     MongooseModule.forFeature([{ name: County.name, schema: CountySchema }])
   ],
   controllers: [CountyController],
-  providers: [CountyService]
+  providers: [CountyService],
+  exports: [MongooseModule.forFeature([{ name: County.name, schema: CountySchema }])],
 })
 export class CountyModule {}

@@ -1,6 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CountyService } from './county.service';
 import {NotFoundError} from "rxjs";
+import { formatCountyResponse } from '../utils/format-response.util';
 
 @Controller('county')
 export class CountyController {
@@ -9,12 +10,12 @@ export class CountyController {
 
     @Get()
     async index() {
-        const counties = this.countyService.getCounties();
+        const counties = await this.countyService.getCounties();
 
         if (!counties) {
             throw new NotFoundError(`Counties not found!`);
         }
 
-        return counties;
+        return { counties: counties.map( county => formatCountyResponse(county)) };
     }
 }

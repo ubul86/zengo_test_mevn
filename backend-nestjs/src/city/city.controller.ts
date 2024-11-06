@@ -2,6 +2,7 @@ import {Body, Controller, Get, Post, Put, Delete, Param, Query, NotFoundExceptio
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto} from "./dto/update-city.dto";
+import {formatCityResponse} from "../utils/format-response.util";
 
 @Controller('city')
 export class CityController {
@@ -15,22 +16,25 @@ export class CityController {
             throw new NotFoundException(`City not found`);
         }
 
-        return city;
+        return formatCityResponse(city);
     }
 
     @Get()
     async index(@Query('countyId') countyId?: string) {
-        return this.cityService.findAllCities(countyId);
+        const cities = await this.cityService.findAllCities(countyId);
+        return cities.map( city => formatCityResponse(city));
     }
 
     @Post()
     async create(@Body() CreateCityDto: CreateCityDto) {
-        return this.cityService.createCity(CreateCityDto);
+        const city = await this.cityService.createCity(CreateCityDto);
+        return formatCityResponse(city);
     }
 
     @Put(':id')
     async update(@Param('id') id: string, @Body() UpdateCityDto: UpdateCityDto) {
-        return this.cityService.updateCity(id, UpdateCityDto);
+        const city = this.cityService.updateCity(id, UpdateCityDto);
+        return formatCityResponse(city);
     }
 
     @Delete(':id')

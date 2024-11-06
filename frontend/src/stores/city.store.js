@@ -13,9 +13,9 @@ export const useCityStore = defineStore('city', {
                 console.error('Error in fetching cities:', error);
             }
         },
-        async addCity(name, county_id) {
+        async addCity(name, countyId) {
             try {
-                const newCity = await cityService.create({ name, county_id });
+                const newCity = await cityService.create({ name, countyId });
                 this.cities.push(newCity);
             } catch (error) {
                 console.error('Error when adding new city:', error);
